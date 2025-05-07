@@ -11,15 +11,17 @@ class DoctorAuthController extends Controller
 {
     protected $doctorAuthService;
 
-    public function __construct(DoctorAuthService $doctorAuthService) {
+    public function __construct(DoctorAuthService $doctorAuthService)
+    {
         $this->doctorAuthService = $doctorAuthService;
     }
 
-    public function register(DocotorRegisterRequest $request) {
-        
+    public function register(DocotorRegisterRequest $request)
+    {
+
         $this->doctorAuthService->register($request);
         // Redirect with a success message
-        return redirect()->route('doctor.schedules')
+        return redirect()->route('doctor.schedules', auth()->user()->id)
             ->with('success', 'Registration successful.');
     }
 }
